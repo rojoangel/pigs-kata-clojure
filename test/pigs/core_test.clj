@@ -8,4 +8,6 @@
 (deftest pig-game-creation-test
   (testing "a game starts with the number of players passed in"
     (is (= 2 (count (:scores (pigs 2)))))
-    (is (= 3 (count (:scores (pigs 3)))))))
+    (is (= 3 (count (:scores (pigs 3))))))
+  (testing "all scores are zero when the game starts"
+    (is (every? zero? (:scores (pigs 7))))))
