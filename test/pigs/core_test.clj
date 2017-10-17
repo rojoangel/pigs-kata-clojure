@@ -22,14 +22,19 @@
 (defn hold [game-state]
   (let [current-player-score-idx (dec (:player-turn game-state))
         rolls-total (apply + (:current-player-rolls game-state))]
-    (update-in game-state [:scores current-player-score-idx] + rolls-total)))
+    (update
+      (update-in game-state [:scores current-player-score-idx] + rolls-total)
+      :player-turn inc)))
 
 (deftest holding-test
-  (testing "holding after no rolls does nothing"
+  (testing "holding after no rolls does not change the scores"
     (let [initial-game-state {:scores [1 2 3] :player-turn 1}]
-      (is (= initial-game-state (hold initial-game-state) ))))
+      (is (= [1 2 3] (:scores (hold initial-game-state)) ))))
   (testing "holding adds rolls to current player score"
     (let [initial-game-state {:scores [1 2 3] :player-turn 1 :current-player-rolls [5 4 3]}]
       (is (= [13 2 3] (:scores (hold initial-game-state)))))
     (let [initial-game-state {:scores [1 2 3] :player-turn 2 :current-player-rolls [5 4 3]}]
-      (is (= [1 14 3] (:scores (hold initial-game-state)))))))
+      (is (= [1 14 3] (:scores (hold initial-game-state))))))
+  (testing "holding changes the player turn"
+    (let [initial-game-state {:scores [0 0 0] :player-turn 1}]
+      (is (= 2 (:player-turn (hold initial-game-state)))))))
