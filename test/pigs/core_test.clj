@@ -30,4 +30,6 @@
       (is (= initial-game-state (hold initial-game-state) ))))
   (testing "holding adds rolls to current player score"
     (let [initial-game-state {:scores [1 2 3] :player-turn 1 :current-player-rolls [5 4 3]}]
-      (is (= [13 2 3] (:scores (hold initial-game-state)))))))
+      (is (= [13 2 3] (:scores (hold initial-game-state)))))
+    (let [initial-game-state {:scores [1 2 3] :player-turn 2 :current-player-rolls [5 4 3]}]
+      (is (= [1 14 3] (:scores (hold initial-game-state)))))))
