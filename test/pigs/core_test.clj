@@ -24,9 +24,12 @@
         rolls-total (apply + (:current-player-rolls game-state))]
     (update-in game-state [:scores current-player-score-idx] + rolls-total)))
 
+(defn- next-turn [n max]
+  (rem (inc n) max))
+
 (defn- change-player-turn [game-state]
   (let [players (count (:scores game-state))]
-    (update game-state :player-turn #(rem (inc %) players))))
+    (update game-state :player-turn next-turn players)))
 
 (defn hold [game-state]
   (-> game-state
