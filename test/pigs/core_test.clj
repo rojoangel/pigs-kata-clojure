@@ -19,12 +19,15 @@
   (testing "a game starts with no rolls"
     (is (empty? (:current-player-rolls (pigs 5))))))
 
-(defn hold [game-state]
+(defn- add-rolls-to-current-player-score [game-state]
   (let [current-player-score-idx (dec (:player-turn game-state))
-        rolls-total (apply + (:current-player-rolls game-state))
-        players (count (:scores game-state))]
+        rolls-total (apply + (:current-player-rolls game-state))]
+    (update-in game-state [:scores current-player-score-idx] + rolls-total)))
+
+(defn hold [game-state]
+  (let [players (count (:scores game-state))]
     (-> game-state
-        (update-in [:scores current-player-score-idx] + rolls-total)
+        add-rolls-to-current-player-score
         (update :player-turn #(rem (inc %) players)))))
 
 (deftest holding-test
