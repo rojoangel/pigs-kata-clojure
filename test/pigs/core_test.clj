@@ -24,11 +24,14 @@
         rolls-total (apply + (:current-player-rolls game-state))]
     (update-in game-state [:scores current-player-score-idx] + rolls-total)))
 
-(defn hold [game-state]
+(defn- change-player-turn [game-state]
   (let [players (count (:scores game-state))]
-    (-> game-state
-        add-rolls-to-current-player-score
-        (update :player-turn #(rem (inc %) players)))))
+    (update game-state :player-turn #(rem (inc %) players))))
+
+(defn hold [game-state]
+  (-> game-state
+      add-rolls-to-current-player-score
+      change-player-turn))
 
 (deftest holding-test
   (testing "holding after no rolls does not change the scores"
