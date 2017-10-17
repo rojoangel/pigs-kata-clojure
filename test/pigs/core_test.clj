@@ -15,4 +15,6 @@
   (testing "all scores are zero when the game starts"
     (is (every? zero? (:scores (pigs 7)))))
   (testing "a game starts with player 1 turn"
-    (is (= 1 (:player-turn (pigs 8))))))
+    (is (= 1 (:player-turn (pigs 8)))))
+  (testing "a game starts with no rolls"
+    (is (empty? (:current-player-rolls (pigs 5))))))
