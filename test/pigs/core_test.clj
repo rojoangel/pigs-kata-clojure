@@ -18,3 +18,11 @@
     (is (= 1 (:player-turn (pigs 8)))))
   (testing "a game starts with no rolls"
     (is (empty? (:current-player-rolls (pigs 5))))))
+
+(defn hold [game-state]
+  game-state)
+
+(deftest holding-test
+  (testing "holding after no rolls does nothing"
+    (let [initial-game-state {:scores [1 2 3] :player-turn 1}]
+      (is (= initial-game-state (hold initial-game-state) )))))
