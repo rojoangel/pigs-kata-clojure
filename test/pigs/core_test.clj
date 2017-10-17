@@ -23,9 +23,9 @@
   (let [current-player-score-idx (dec (:player-turn game-state))
         rolls-total (apply + (:current-player-rolls game-state))
         players (count (:scores game-state))]
-    (update
-      (update-in game-state [:scores current-player-score-idx] + rolls-total)
-      :player-turn #(rem (inc %) players))))
+    (-> game-state
+        (update-in [:scores current-player-score-idx] + rolls-total)
+        (update :player-turn #(rem (inc %) players)))))
 
 (deftest holding-test
   (testing "holding after no rolls does not change the scores"
