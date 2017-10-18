@@ -40,3 +40,9 @@
 
 (defn end-game? [game-state]
   (not-every? #(< % 100) (:scores game-state)))
+
+(defn winner [game-state]
+  (:player
+    (first
+      (filter #(<= 100 (:score %))
+              (map-indexed (fn [idx score] {:player (inc idx) :score score}) (:scores game-state))))))

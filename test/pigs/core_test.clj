@@ -61,12 +61,6 @@
     (let [game-state {:scores [0 12 103]}]
       (is (true? (end-game? game-state))))))
 
-(defn winner [game-state]
-  (:player
-    (first
-      (filter #(<= 100 (:score %))
-              (map-indexed (fn [idx score] {:player (inc idx) :score score}) (:scores game-state))))))
-
 (deftest determining-the-winner-test
   (testing "nobody wins if there is no score greater than 100"
     (let [game-state {:scores [0 12 55 99 67]}]
