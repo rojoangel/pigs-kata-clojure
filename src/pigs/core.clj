@@ -1,6 +1,6 @@
 (ns pigs.core)
 
-(defn pigs [players]
+(defn new-game [players]
   (let [initial-scores (repeat players 0)
         initial-player-turn 1]
     (-> (hash-map)

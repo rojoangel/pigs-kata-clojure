@@ -4,14 +4,14 @@
 
 (deftest pig-game-creation-test
   (testing "a game starts with the number of players passed in"
-    (is (= 2 (count (:scores (pigs 2)))))
-    (is (= 3 (count (:scores (pigs 3))))))
+    (is (= 2 (count (:scores (new-game 2)))))
+    (is (= 3 (count (:scores (new-game 3))))))
   (testing "all scores are zero when the game starts"
-    (is (every? zero? (:scores (pigs 7)))))
+    (is (every? zero? (:scores (new-game 7)))))
   (testing "a game starts with player 1 turn"
-    (is (= 1 (:player-turn (pigs 8)))))
+    (is (= 1 (:player-turn (new-game 8)))))
   (testing "a game starts with no rolls"
-    (is (empty? (:current-player-rolls (pigs 5))))))
+    (is (empty? (:current-player-rolls (new-game 5))))))
 
 (deftest holding-test
   (testing "holding after no rolls does not change the scores"
