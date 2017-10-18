@@ -37,3 +37,6 @@
         reset-rolls
         change-player-turn)
     (add-to-rolls game-state dice-value)))
+
+(defn end-game? [game-state]
+  (not-every? #(< % 100) (:scores game-state)))
