@@ -62,7 +62,9 @@
   (update game-state :current-player-rolls conj dice-value))
 
 (defn roll [game-state dice-value]
-  (add-to-rolls game-state dice-value))
+  (if (= 1 dice-value)
+    (reset-rolls game-state)
+    (add-to-rolls game-state dice-value)))
 
 (deftest rolling-a-non-one-test
   (testing "rolling a value different to one adds dice value to rolls"
@@ -73,3 +75,9 @@
     (let [initial-game-state {:player-turn 1}
           dice-value 2]
       (is (= 1 (:player-turn (roll initial-game-state dice-value)))))))
+
+(deftest rolling-a-one-test
+  (testing "rolling a one resets rolls"
+    (let [initial-game-state {:current-player-rolls '(4 6 5)}
+          dice-value 1]
+      (is (empty? (:current-player-rolls (roll initial-game-state 1)))))))
