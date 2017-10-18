@@ -60,3 +60,11 @@
       (is (true? (end-game? game-state))))
     (let [game-state {:scores [0 12 103]}]
       (is (true? (end-game? game-state))))))
+
+(defn winner [game-state]
+  )
+
+(deftest determining-the-winner-test
+  (testing "nobody wins if there is no score greater than 100"
+    (let [game-state {:scores [0 12 55 99 67]}]
+      (is (nil? (winner game-state))))))
