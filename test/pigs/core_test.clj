@@ -31,9 +31,13 @@
   (let [players (count (:scores game-state))]
     (update game-state :player-turn next-turn players)))
 
+(defn- reset-rolls [game-state]
+  (update game-state :current-player-rolls empty))
+
 (defn hold [game-state]
   (-> game-state
       add-rolls-to-current-player-score
+      reset-rolls
       change-player-turn))
 
 (deftest holding-test
@@ -49,4 +53,7 @@
     (let [initial-game-state {:scores [0 0 0] :player-turn 1}]
       (is (= 2 (:player-turn (hold initial-game-state)))))
     (let [initial-game-state {:scores [0 0 0] :player-turn 3}]
-      (is (= 1 (:player-turn (hold initial-game-state)))))))
+      (is (= 1 (:player-turn (hold initial-game-state))))))
+  (testing "holding resets rolls"
+    (let [initial-game-state {:scores [0 0 0] :player-turn 1 :current-player-rolls [4 5 4]}]
+      (is (empty? (:current-player-rolls (hold initial-game-state)))))))
