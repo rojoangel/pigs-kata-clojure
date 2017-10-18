@@ -57,3 +57,12 @@
   (testing "holding resets rolls"
     (let [initial-game-state {:scores [0 0 0] :player-turn 1 :current-player-rolls [4 5 4]}]
       (is (empty? (:current-player-rolls (hold initial-game-state)))))))
+
+(defn roll [game-state dice-value]
+  (update game-state :current-player-rolls conj dice-value))
+
+(deftest rolling-test
+  (testing "rolling adds dice value to rolls"
+    (let [initial-game-state (pigs 2)
+          dice-value 2]
+      (is (= dice-value (first (:current-player-rolls (roll initial-game-state dice-value))))))))
