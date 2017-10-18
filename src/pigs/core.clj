@@ -1,10 +1,11 @@
 (ns pigs.core)
 
 (defn pigs [players]
-  {
-   :scores (repeat players 0)
-   :player-turn 1
-   })
+  (let [initial-scores (repeat players 0)
+        initial-player-turn 1]
+    (-> (hash-map)
+        (assoc :scores initial-scores)
+        (assoc :player-turn initial-player-turn))))
 
 (defn- add-rolls-to-current-player-score [game-state]
   (let [current-player-score-idx (dec (:player-turn game-state))
