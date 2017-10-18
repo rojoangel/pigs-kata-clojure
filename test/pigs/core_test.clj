@@ -58,8 +58,11 @@
     (let [initial-game-state {:scores [0 0 0] :player-turn 1 :current-player-rolls [4 5 4]}]
       (is (empty? (:current-player-rolls (hold initial-game-state)))))))
 
-(defn roll [game-state dice-value]
+(defn- add-to-rolls [game-state dice-value]
   (update game-state :current-player-rolls conj dice-value))
+
+(defn roll [game-state dice-value]
+  (add-to-rolls game-state dice-value))
 
 (deftest rolling-a-non-one-test
   (testing "rolling a value different to one adds dice value to rolls"
