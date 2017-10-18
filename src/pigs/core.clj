@@ -3,7 +3,7 @@
 (defn new-game [players]
   (let [initial-scores (repeat players 0)
         initial-player-turn 1]
-    (-> (hash-map)
+    (-> hash-map
         (assoc :scores initial-scores)
         (assoc :player-turn initial-player-turn))))
 
