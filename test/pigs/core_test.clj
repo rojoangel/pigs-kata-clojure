@@ -68,4 +68,8 @@
       (is (= dice-value (first (:current-player-rolls (roll initial-game-state dice-value))))))
     (let [initial-game-state {:current-player-rolls '(4 5 4)}
           dice-value 2]
-      (is (= dice-value (first (:current-player-rolls (roll initial-game-state dice-value))))))))
+      (is (= dice-value (first (:current-player-rolls (roll initial-game-state dice-value)))))))
+  (testing "rolling a value different to one keeps the player turn"
+    (let [initial-game-state {:player-turn 1}
+          dice-value 2]
+      (is (= 1 (:player-turn (roll initial-game-state dice-value)))))))
