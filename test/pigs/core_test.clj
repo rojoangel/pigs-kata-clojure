@@ -63,9 +63,6 @@
 
 (deftest rolling-a-non-one-test
   (testing "rolling a value different to one adds dice value to rolls"
-    (let [initial-game-state (pigs 2)
-          dice-value 2]
-      (is (= dice-value (first (:current-player-rolls (roll initial-game-state dice-value))))))
     (let [initial-game-state {:current-player-rolls '(4 5 4)}
           dice-value 2]
       (is (= dice-value (first (:current-player-rolls (roll initial-game-state dice-value)))))))
