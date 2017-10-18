@@ -51,7 +51,7 @@
           dice-value 1]
       (is (= 2 (:player-turn (roll initial-game-state dice-value)))))))
 
-(deftest ending-the-game
+(deftest ending-the-game-test
   (testing "the game continues if all scores are less than 100"
     (let [game-state {:scores [99 0 12 78]}]
       (is (false? (end-game? game-state)))))
