@@ -29,7 +29,10 @@
   (case command
 
     :hold
-    (pigs/hold game-state)))
+    (let [new-state (pigs/hold game-state)]
+      (do
+        (show-game-state new-state)
+        (dispatch game-state (read-command))))))
 
 (defn -main [& args]
   (do
