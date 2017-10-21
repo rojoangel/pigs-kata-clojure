@@ -13,7 +13,10 @@
     (update-in game-state [:scores current-player-score-idx] + rolls-total)))
 
 (defn- next-turn-player [n max]
-  (rem (inc n) max))
+  (let [next-player (inc n)]
+    (if (> next-player max)
+      1
+      next-player)))
 
 (defn- change-player-turn [game-state]
   (let [players (count (:scores game-state))]
