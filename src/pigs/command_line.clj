@@ -3,4 +3,5 @@
             [clojure.string :as str]))
 
 (defn -main [& args]
-  )
+  (println "Let's play pigs..."))
+
