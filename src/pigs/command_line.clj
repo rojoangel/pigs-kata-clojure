@@ -25,12 +25,26 @@
     (let [[command-str & _] (str/split (read-line) #" ")]
       (keyword command-str))))
 
+(defn- show-roll [dice-value]
+  (print "you got a" dice-value)
+  (if (= 1 dice-value)
+    (println ". You lose your turn.")
+    (println ". You can keep rolling.")))
+
 (defn- dispatch [game-state command]
   (case command
 
     :hold
     (let [new-state (pigs/hold game-state)]
       (do
+        (show-game-state new-state)
+        (dispatch new-state (read-command))))
+
+    :roll
+    (let [dice-value (inc (rand-int 6))
+          new-state (pigs/roll game-state dice-value)]
+      (do
+        (show-roll dice-value)
         (show-game-state new-state)
         (dispatch new-state (read-command))))))
 
