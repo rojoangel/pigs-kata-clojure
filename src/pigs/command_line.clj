@@ -53,7 +53,10 @@
       (do
         (show-roll dice-value)
         (show-game-state new-state)
-        (dispatch new-state (read-command))))))
+        (dispatch new-state (read-command))))
+
+    ;; otherwise
+    (dispatch game-state (read-command))))
 
 (defn -main [& args]
   (do
