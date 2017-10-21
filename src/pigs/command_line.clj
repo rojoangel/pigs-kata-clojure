@@ -32,12 +32,12 @@
     (let [new-state (pigs/hold game-state)]
       (do
         (show-game-state new-state)
-        (dispatch game-state (read-command))))))
+        (dispatch new-state (read-command))))))
 
 (defn -main [& args]
   (do
     (salute)
-    (let [game-state (pigs/new-game (read-number-of-players))]
+    (let [initial-game-state (pigs/new-game (read-number-of-players))]
       (do
-        (show-game-state game-state)
-        (dispatch game-state (read-command))))))
+        (show-game-state initial-game-state)
+        (dispatch initial-game-state (read-command))))))
