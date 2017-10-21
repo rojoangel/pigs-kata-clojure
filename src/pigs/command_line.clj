@@ -15,4 +15,6 @@
 (defn -main [& args]
   (do
     (salute)
-    (read-number-of-players)))
+    (-> (read-number-of-players)
+        (pigs/new-game)
+        )))
