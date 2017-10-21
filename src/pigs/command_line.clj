@@ -25,10 +25,16 @@
     (let [[command-str & _] (str/split (read-line) #" ")]
       (keyword command-str))))
 
+(defn dispatch [game-state command]
+  (case command
+
+    :hold
+    (pigs/hold game-state)))
+
 (defn -main [& args]
   (do
     (salute)
-    (-> (read-number-of-players)
-        (pigs/new-game)
-        (show-game-state))
-    (read-command)))
+    (let [game-state (pigs/new-game (read-number-of-players))]
+      (do
+        (show-game-state game-state)
+        (dispatch game-state (read-command))))))
