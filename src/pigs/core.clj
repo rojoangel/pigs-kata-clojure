@@ -3,7 +3,7 @@
 (defn new-game [players]
   (let [initial-scores (repeat players 0)
         initial-player-turn 1]
-    (-> hash-map
+    (-> (hash-map)
         (assoc :scores initial-scores)
         (assoc :player-turn initial-player-turn))))
 
@@ -44,7 +44,7 @@
 (defn winner [game-state]
   (->> game-state
        :scores
-       map-indexed (fn [idx score] {:player (inc idx) :score score})
-       filter #(<= 100 (:score %))
+       (map-indexed (fn [idx score] {:player (inc idx) :score score}))
+       (filter #(<= 100 (:score %)))
        first
        :player))
