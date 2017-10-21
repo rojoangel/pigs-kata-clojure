@@ -2,6 +2,9 @@
   (:require [pigs.core :as pigs]
             [clojure.string :as str]))
 
+(defn- salute []
+  (println "Let's play pigs..."))
+
 (defn- read-number-of-players []
   (do
     (print "Please, enter number of players: ")
@@ -11,5 +14,5 @@
 
 (defn -main [& args]
   (do
-    (println "Let's play pigs...")
+    (salute)
     (read-number-of-players)))
