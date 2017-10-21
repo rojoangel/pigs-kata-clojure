@@ -31,6 +31,9 @@
     (println ". You lose your turn.")
     (println ". You can keep rolling.")))
 
+(defn- show-game-end [game-state]
+  (println "player" (pigs/winner game-state) "wins!"))
+
 (defn- dispatch [game-state command]
   (case command
 
@@ -38,7 +41,11 @@
     (let [new-state (pigs/hold game-state)]
       (do
         (show-game-state new-state)
-        (dispatch new-state (read-command))))
+        (if (pigs/end-game? new-state)
+          (do
+            (show-game-end new-state)
+            (System/exit 0))
+          (dispatch new-state (read-command)))))
 
     :roll
     (let [dice-value (inc (rand-int 6))
