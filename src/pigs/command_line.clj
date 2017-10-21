@@ -25,7 +25,7 @@
     (let [[command-str & _] (str/split (read-line) #" ")]
       (keyword command-str))))
 
-(defn dispatch [game-state command]
+(defn- dispatch [game-state command]
   (case command
 
     :hold
