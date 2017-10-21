@@ -18,9 +18,17 @@
         turn (str/join ", " (:current-player-rolls game-state))]
     (println "scores: [" scores "] " player-turn " turn: [" turn "]")))
 
+(defn- read-command []
+  (do
+    (print "roll or hold? > ")
+    (flush)
+    (let [[command-str & _] (str/split (read-line) #" ")]
+      (keyword command-str))))
+
 (defn -main [& args]
   (do
     (salute)
     (-> (read-number-of-players)
         (pigs/new-game)
-        (show-game-state))))
+        (show-game-state))
+    (read-command)))
